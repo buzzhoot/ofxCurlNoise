@@ -46,6 +46,9 @@ void CurlNoise::loadShader(){
 		layout(std430, binding=0) buffer particles{
 			Particle p[];
 		};
+		//HLSL COMPUTE SHADER
+		RWSturcturedBuffer<particles> p
+		
 
 		// layout(std430, binding=1) buffer lifespans{
 		// 	float lifespan[];
@@ -63,9 +66,9 @@ void CurlNoise::loadShader(){
 		uniform float NOISE_TIME_SCALE;
 
 		const int OCTAVES = 3;
-
-		void main(){
-			uint gid = gl_GlobalInvocationID.x;
+		void main(uint 3 id :SV_DispatchThreadID){  //DX twitch
+ 			//uint gid = gl_GlobalInvocationID.x;
+                uint gid = id.x;
 
 			vec3 oldPosition = p[gid].pos.xyz;
 			vec3 noisePosition = oldPosition * NOISE_POSITION_SCALE;
